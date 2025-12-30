@@ -14,21 +14,12 @@ class CarController extends Controller
      */
     public function index()
     {
-        // FuelType::create([
 
-        //     'name' => 'hybrid'
 
-        // ]);
-
-        // $car = Car::find(1);
-        // $car->price = 15000;
-        // $car->save();
-
-        dd(Car::where('price', '>', 20000)->get(),
-           Maker::whereName('Toyota')->get()
+        // dd(Car::where('price', '>', 20000)->get(),
+        //    Maker::whereName('Toyota')->get()
 
         
-    );
 
 
     }
