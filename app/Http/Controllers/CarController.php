@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
-use App\Models\Maker;
-use App\Models\FuelType;
 
 class CarController extends Controller
 {
@@ -14,14 +12,11 @@ class CarController extends Controller
      */
     public function index()
     {
+        dd(
 
+            Car::find(1)->favouredUsers
 
-        // dd(Car::where('price', '>', 20000)->get(),
-        //    Maker::whereName('Toyota')->get()
-
-        
-
-
+        );
     }
 
     /**
