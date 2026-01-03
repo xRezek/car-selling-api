@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\City;
+use App\Models\Maker;
+use App\Models\User;
+use App\Models\Model;
+use App\Models\Voivodeship;
 
 class CarController extends Controller
 {
@@ -14,7 +19,8 @@ class CarController extends Controller
     {
         dd(
 
-            Car::find(1)->favouredUsers
+            City::factory(16)
+                ->make()
 
         );
     }
