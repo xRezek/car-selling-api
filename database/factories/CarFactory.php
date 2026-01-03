@@ -40,8 +40,15 @@ class CarFactory extends Factory
             'car_type_id' => CarType::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'city_id' => City::inRandomOrder()->first()->id,
-            'voivodeship_id' => Voivodeship::inRandomOrder()->first()->id,
-            'fuel_type_id' => FuelType::inRandomOrder()->first()->id
+            'fuel_type_id' => FuelType::inRandomOrder()->first()->id,
+            'address' => fake('pl_PL')->address(),
+            'phone' => function (array $attributes){
+
+                return User::find($attributes['user_id'])->phone;
+
+            },
+            'description' => fake('pl_PL')->text(2000),
+            'published_at' => fake()->optional(0.9)->dateTimeBetween('-1 month', '+1 day')
 
 
         ];
