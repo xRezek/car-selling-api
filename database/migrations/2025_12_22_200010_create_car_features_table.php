@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('car_features', function (Blueprint $table) {
             $table->unsignedBigInteger('car_id')->primary();
             $table->boolean('abs')->default(0);
-            $table->boolean('air_condidtioning')->default(0);
+            $table->boolean('air_conditioning')->default(0);
             $table->boolean('power_windows')->default(0);
             $table->boolean('power_door_locks')->default(0);
             $table->boolean('cruise_control')->default(0);

@@ -29,7 +29,7 @@ class CarFactory extends Factory
             'maker_id' => Maker::inRandomOrder()->first()->id,
             'model_id' => function (array $attributes){
 
-                Model::where('maker_id', $attributes['maker_id'])
+                 return Model::where('maker_id', $attributes['maker_id'])
                     ->inRandomOrder()->first()->id;
 
             },

@@ -43,7 +43,7 @@ class Car extends Model
     public function features(): HasOne
     {
         
-        return $this->hasOne(CarFeatures::class, 'car_id', 'id');
+        return $this->hasOne(CarFeatures::class, 'car_id');
 
     }
 
@@ -72,7 +72,6 @@ class Car extends Model
     {
 
         return $this->belongsTo(FuelType::class);
-
 
     }
 
