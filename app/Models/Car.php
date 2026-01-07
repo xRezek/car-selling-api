@@ -33,6 +33,14 @@ class Car extends Model
         
     ];
 
+    protected $hidden = [
+        
+        'updated_at',
+        'deleted_at'
+    
+    ];
+
+
     public function favouredUsers(): BelongsToMany
     {
 

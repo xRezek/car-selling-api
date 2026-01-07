@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-
+use App\Http\Resources\CarResource;
+use App\Models\Car;
 
 class CarController extends Controller
 {
@@ -14,7 +14,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        return ["message" => "index yay!"];
+
+        return CarResource::collection(Car::with('owner')->paginate(3));
+    
     }
 
     /**
@@ -30,10 +32,10 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Car $car)
     {
         
-        return ["message" => "filtered yay!"];
+        return new CarResource($car);
 
     }
 
@@ -42,7 +44,9 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         return ["message" => "updated yay!"];
+
     }
 
     /**
@@ -50,6 +54,8 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
+
         return ["message" => "deleted yay!"];
+
     }
 }
