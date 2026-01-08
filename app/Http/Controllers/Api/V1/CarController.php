@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCarRequest;
 use App\Http\Resources\CarResource;
 use App\Models\Car;
 
@@ -22,10 +23,16 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
 
-        return ["message" => "stored yay!"];
+        $data = $request->validated();
+
+        $car = Car::create($data);
+
+        return CarResource::make($car)
+            ->response()
+            ->setStatusCode(201);
     
     }
 
