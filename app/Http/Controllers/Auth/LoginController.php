@@ -26,6 +26,7 @@ class LoginController extends Controller
             "token" => $token
 
         ];
+
     }
 
     /**
@@ -38,5 +39,7 @@ class LoginController extends Controller
         $user->currentAccessToken()->delete();
 
         return response()->noContent();
+
     }
+
 }
