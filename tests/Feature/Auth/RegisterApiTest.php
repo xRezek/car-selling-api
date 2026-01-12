@@ -31,7 +31,7 @@ test('User cannot register with invalid name', function(){
     ]);
 
     $response->assertStatus(422)
-        ->assertJsonstructure([
+        ->assertJsonStructure([
 
             "message",
             "errors" => [
@@ -46,7 +46,6 @@ test('User cannot register with invalid name', function(){
 
 });
 
-
 test('User cannot register with invalid email', function(){
 
     $response = $this->postJson('/api/register',[
@@ -59,7 +58,7 @@ test('User cannot register with invalid email', function(){
     ]);
 
     $response->assertStatus(422)
-        ->assertJsonstructure([
+        ->assertJsonStructure([
 
             "message",
             "errors" => [
@@ -86,7 +85,60 @@ test('User cannot register with empty password',function(){
     ]);
 
     $response->assertStatus(422)
-    ->assertJsonstructure([
+    ->assertJsonStructure([
+
+        "message",
+        "errors" => [
+
+            "password"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['password']);
+
+
+});
+
+test('User cannot register with invalid password confirmation',function(){
+
+    $response = $this->postJson('/api/register',[
+
+        'email' => 'kox@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'WrongConfirmation'
+
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonStructure([
+
+        "message",
+        "errors" => [
+
+            "password"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['name']);
+
+
+});
+
+test('Registration requires name field',function(){
+
+    $response = $this->postJson('/api/register',[
+
+        'name' => "Kox",
+        'email' => 'kox@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'WrongConfirmation'
+
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonStructure([
 
         "message",
         "errors" => [
