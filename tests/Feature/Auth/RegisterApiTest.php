@@ -121,7 +121,7 @@ test('User cannot register with invalid password confirmation',function(){
         ]
 
     ])
-    ->assertJsonValidationErrors(['name']);
+    ->assertJsonValidationErrors(['password']);
 
 
 });
@@ -130,10 +130,87 @@ test('Registration requires name field',function(){
 
     $response = $this->postJson('/api/register',[
 
-        'name' => "Kox",
         'email' => 'kox@example.com',
         'password' => 'password',
-        'password_confirmation' => 'WrongConfirmation'
+        'password_confirmation' => 'password'
+
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonStructure([
+
+        "message",
+        "errors" => [
+
+            "name"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['name']);
+
+
+});
+
+test('Registration requires email field',function(){
+
+    $response = $this->postJson('/api/register',[
+
+        'name' => "Kox",
+        'password' => 'password',
+        'password_confirmation' => 'password'
+
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonStructure([
+
+        "message",
+        "errors" => [
+
+            "email"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['email']);
+
+
+});
+
+test('Registration requires password field',function(){
+
+    $response = $this->postJson('/api/register',[
+
+        'name' => "Kox",
+        'email' => 'kox@example.com',
+        'password_confirmation' => 'password'
+
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonStructure([
+
+        "message",
+        "errors" => [
+
+            "password"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['password']);
+
+
+});
+
+test('Registration requires password_confirmation field',function(){
+
+    $response = $this->postJson('/api/register',[
+
+        'name' => "Kox",
+        'email' => 'kox@example.com',
+        'password_' => 'password'
 
     ]);
 
