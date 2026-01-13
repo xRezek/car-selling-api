@@ -210,7 +210,7 @@ test('Registration requires password_confirmation field',function(){
 
         'name' => "Kox",
         'email' => 'kox@example.com',
-        'password_' => 'password'
+        'password' => 'password'
 
     ]);
 
