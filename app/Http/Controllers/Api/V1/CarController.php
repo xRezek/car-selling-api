@@ -16,7 +16,7 @@ class CarController extends Controller
     public function index()
     {
 
-        return CarResource::collection(Car::with('owner')->paginate(3));
+        return CarResource::collection(Car::with('owner')->paginate(36));
     
     }
 
@@ -30,7 +30,7 @@ class CarController extends Controller
 
         $car = Car::create($data);
 
-        return CarResource::make($car)
+        return CarResource::make($car->load('owner'))
             ->response()
             ->setStatusCode(201);
     
@@ -42,6 +42,8 @@ class CarController extends Controller
     public function show(Car $car)
     {
         
+        $car->load('owner');
+
         return new CarResource($car);
 
     }

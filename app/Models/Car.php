@@ -83,6 +83,12 @@ class Car extends Model
         return $this->belongsTo(FuelType::class);
 
     }
+    public function gearbox(): BelongsTo
+    {
+
+        return $this->belongsTo(Gearbox::class);
+
+    }
 
     public function owner(): BelongsTo
     {

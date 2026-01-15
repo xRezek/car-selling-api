@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\CarType;
 use App\Models\FuelType;
+use App\Models\Gearbox;
 use App\Models\Maker;
 use App\Models\Model;
 use App\Models\User;
@@ -53,6 +54,16 @@ class DatabaseSeeder extends Seeder
 
             )
             ->count(5)
+            ->create();
+
+        Gearbox::factory()
+            ->sequence(
+
+                ['name' => 'automatic'],
+                ['name' => 'manual']
+
+            )
+            ->count(2)
             ->create();
 
 

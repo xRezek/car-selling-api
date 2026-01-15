@@ -1,25 +1,24 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CarController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware('auth:sanctum')->group(function(){
-    
-    Route::get('/user', function (Request $request) {
+Route::prefix('v1')->group(function () {
 
-        return $request->user();
-    
+    Route::apiResource('cars', CarController::class)
+        ->only(['index', 'show']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::apiResource('cars', CarController::class)
+            ->only(['store', 'update', 'destroy']);
+
     });
-    
-    Route::prefix('v1')->group(function(){
-        
-        Route::apiResource('cars', CarController::class);
-        
-    });
-    
+
 });
+
+
 
 require __DIR__ . '/auth.php';
 

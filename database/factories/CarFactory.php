@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\CarType;
 use App\Models\City;
 use App\Models\FuelType;
+use App\Models\Gearbox;
 use App\Models\Maker;
 use App\Models\Model;
 use App\Models\User;
@@ -37,6 +38,7 @@ class CarFactory extends Factory
             'price' => ((int)fake()->randomFloat(2, 5, 100)) * 1000,
             'vin' => strtoupper(Str::random(17)),
             'mileage' => ((int)fake()->randomFloat(2, 5, 100)) * 1000,
+            'gearbox_id' => Gearbox::inRandomOrder()->first()->id,
             'car_type_id' => CarType::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'city_id' => City::inRandomOrder()->first()->id,

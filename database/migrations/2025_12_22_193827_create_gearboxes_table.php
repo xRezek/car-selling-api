@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('gearboxes', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId('voivodeship_id')->constrained('voivodeships');
             $table->string('name', 45);
             
         });
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('gearboxes');
     }
 };
