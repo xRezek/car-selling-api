@@ -1,6 +1,10 @@
 <?php
 
-use Pest\Support\Str;
+
+use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 test('User can register with valid credentials', function(){
 
@@ -226,6 +230,65 @@ test('Registration requires password_confirmation field',function(){
 
     ])
     ->assertJsonValidationErrors(['password']);
+
+
+});
+
+test('Test throttling: Rate is limited after too many attempts', function(){
+
+
+
+    for($i = 0; $i < 10; $i++){
+
+        $response = $this->postJson('/api/register',[
+
+            'email' => 'kox@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+
+        ]);
+
+    }
+
+    $response = $this->postJson('/api/register',[
+
+        'email' => 'kox@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password'
+
+    ]);
+
+    $response->assertStatus(429);
+
+});
+
+test('User cannot register with already taken email', function(){
+
+    User::factory()->create([
+
+        'email' => 'kox@example.com',
+        'password' => Hash::make('password'),
+    
+    ]);
+
+    $response = $this->postJson('/api/register',[
+
+        'name' => "Kox",
+        'email' => 'kox@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password'
+    ]);
+    $response->assertStatus(422)
+    ->assertJsonStructure([
+        "message",
+        "errors" => [
+
+            "email"
+
+        ]
+
+    ])
+    ->assertJsonValidationErrors(['email']);
 
 
 });
